@@ -177,7 +177,7 @@ export default function FindIdModal({ onClose }) {
               <button
                 type="button"
                 className={modalStyles.kakaoButton}
-                onClick={() => window.location.href = "http://localhost:4000/auth/kakao"}
+                onClick={() => window.location.href = `http://${import.meta.env.OST}:4000/auth/kakao`}
               >
                 카카오 로그인
               </button>
@@ -186,7 +186,7 @@ export default function FindIdModal({ onClose }) {
               <button
                 type="button"
                 className={modalStyles.googleButton}
-                onClick={() => window.location.href = "http://localhost:4000/auth/google"}
+                onClick={() => window.location.href = `http://${import.meta.env.HOST}:4000/auth/google`}
               >
                 구글 로그인
               </button>
@@ -195,7 +195,7 @@ export default function FindIdModal({ onClose }) {
               <button
                 type="button"
                 className={modalStyles.naverButton}
-                onClick={() => window.location.href = "http://localhost:4000/auth/naver"}
+                onClick={() => window.location.href = `http://${import.meta.env.HOST}:4000/auth/naver`}
               >
                 네이버 로그인
               </button>

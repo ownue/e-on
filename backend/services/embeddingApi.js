@@ -3,7 +3,7 @@ const axios = require('axios');
 
 module.exports = async function callEmbeddingRecommendation(userText, challengeTexts) {
   try {
-    const base = process.env.PY_RECO_BASE_URL || 'http://localhost:5000';
+    const base = process.env.PY_RECO_BASE_URL || `http://${process.env.HOST}:5000`;
     const response = await axios.post(
       `${base}/recommend`,
       {

@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_ID_TEXT = credentials('dockerhub-id-text')
-        VITE_API_URL = credentials('vite-api-url')
+        DOCKERHUB_USERNAME = credentials('dockerhub-username')
+        VITE_API_URL       = credentials('vite-base-url')
     }
 
     stages {
@@ -15,8 +15,8 @@ pipeline {
 
         stage('Env Test') {
             steps {
-                sh 'echo "DockerHub ID: $DOCKERHUB_ID_TEXT"'
-                sh 'echo "VITE API URL: $VITE_API_URL"'
+                sh 'echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME"'
+                sh 'echo "VITE_API_URL=$VITE_API_URL"'
             }
         }
     }

@@ -12,8 +12,8 @@ export function useNotifications() {
   const [page, setPage] = useState(1);
   const pageSize = 10;
 
-  // 백엔드 주소 (.env에 VITE_API_URL=http://localhost:4000 권장)
-  const BASE_URL = import.meta.env?.VITE_API_URL || "http://localhost:4000";
+  // 백엔드 주소 (.env에 VITE_API_URL=http://${process.env.HOST}:4000 권장)
+  const BASE_URL = import.meta.env?.VITE_BASE_URL || `http://${import.meta.env.HOST}:4000`;
 
   const fetchUnread = useCallback(async () => {
     try {

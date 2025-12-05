@@ -79,9 +79,7 @@ pipeline {
                     projectId:         env.PROJECT_ID,
                     clusterName:       env.CLUSTER_NAME,
                     location:          env.LOCATION,
-                    manifestPattern:   '''k8s/mysql-deployment.yaml
-k8s/backend-deployment.yaml
-k8s/frontend-deployment.yaml''',   // 배포 yaml 경로
+                    manifestPattern:   'k8s/eon-all.yaml',   // 배포 yaml 경로
                     credentialsId:     env.CREDENTIALS_ID,
                     verifyDeployments: true
                 ])

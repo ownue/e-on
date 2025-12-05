@@ -14,6 +14,8 @@ pipeline {
         // 이미지 이름
         BE_IMAGE_NAME = "${DOCKERHUB_USERNAME}/e-on-backend"
         FE_IMAGE_NAME = "${DOCKERHUB_USERNAME}/e-on-frontend"
+
+        DOCKER_API_VERSION = '1.41'
     }
 
     stages {

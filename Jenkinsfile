@@ -4,7 +4,7 @@ pipeline {
     environment {
         PROJECT_ID    = 'education-on-474706'      // GCP 프로젝트 ID
         CLUSTER_NAME  = 'k8s'                      // GKE 클러스터 이름
-        LOCATION      = 'asia-northeast3-a'        // GKE 지역
+        LOCATION      = 'asia-northeast3-a'        // GKE 지역 (zone)
         CREDENTIALS_ID = 'gcp-sa-jenkins'          // Jenkins Credentials ID (서비스 계정 키)
 
         // --- Docker Hub & 프론트엔드 설정 ---

@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         PROJECT_ID    = 'education-on-474706'      // GCP 프로젝트 ID
-        CLUSTER_NAME  = 'eon-cluster-1'            // GKE 클러스터 이름
+        CLUSTER_NAME  = 'k8s'                      // GKE 클러스터 이름
         LOCATION      = 'asia-northeast3-a'        // GKE 지역
         CREDENTIALS_ID = 'gcp-sa-jenkins'          // Jenkins Credentials ID (서비스 계정 키)
 

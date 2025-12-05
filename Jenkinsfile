@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKERHUB_ID_TEXT = credentials('dockerhub-id-text')
+        VITE_API_URL = credentials('vite-api-url')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -8,16 +13,16 @@ pipeline {
             }
         }
 
-        stage('Hello') {
+        stage('Env Test') {
             steps {
-                sh 'echo "Jenkins pipeline is working!"'
+                sh 'echo "DockerHub ID: $DOCKERHUB_ID_TEXT"'
+                sh 'echo "VITE API URL: $VITE_API_URL"'
             }
         }
     }
 
     post {
         always {
-            echo 'Cleaning workspace...'
             cleanWs()
         }
     }

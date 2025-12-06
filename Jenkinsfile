@@ -69,20 +69,34 @@ pipeline {
 
         stage('Deploy to GKE') {
             when {
-                branch 'main'   // main 에서만 배포
+                branch 'main'   // 여전히 main 에서만 배포
             }
             steps {
-                echo "=== Deploy to GKE (Rolling Update) ==="
+                echo "=== Deploy to GKE with kubectl ==="
 
-                step([
-                    $class: 'KubernetesEngineBuilder',
-                    projectId:         env.PROJECT_ID,
-                    clusterName:       env.CLUSTER_NAME,
-                    location:          env.LOCATION,
-                    manifestPattern:   'k8s/*.yaml',   // 배포 yaml 경로
-                    credentialsId:     env.CREDENTIALS_ID,
-                    verifyDeployments: true
-                ])
+                // 서비스 계정 키를 파일로 받아오기
+                withCredentials([file(credentialsId: 'gcp-sa-jenkins', variable: 'GOOGLE_CLOUD_KEYFILE_JSON')]) {
+                    sh """
+                    echo ">>> gcloud auth"
+                    gcloud auth activate-service-account --key-file="$GOOGLE_CLOUD_KEYFILE_JSON"
+
+                    echo ">>> gcloud config set project"
+                    gcloud config set project ${PROJECT_ID}
+
+                    echo ">>> get-credentials for cluster ${CLUSTER_NAME}"
+                    gcloud container clusters get-credentials ${CLUSTER_NAME} \\
+                        --zone ${LOCATION} \\
+                        --project ${PROJECT_ID}
+
+                    echo ">>> kubectl apply manifests"
+                    kubectl apply -f k8s/mysql-deployment.yaml
+                    kubectl apply -f k8s/backend-deployment.yaml
+                    kubectl apply -f k8s/frontend-deployment.yaml
+
+                    echo ">>> kubectl get pods"
+                    kubectl get pods -o wide
+                    """
+                }
             }
         }
     }

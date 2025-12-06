@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm   // 멀티브랜치에서는 이게 정답
+                checkout scm
             }
         }
 
@@ -79,7 +79,7 @@ pipeline {
                     projectId:         env.PROJECT_ID,
                     clusterName:       env.CLUSTER_NAME,
                     location:          env.LOCATION,
-                    manifestPattern:   'k8s/eon-all.yaml',   // 배포 yaml 경로
+                    manifestPattern:   'k8s/*.yaml',   // 배포 yaml 경로
                     credentialsId:     env.CREDENTIALS_ID,
                     verifyDeployments: true
                 ])
